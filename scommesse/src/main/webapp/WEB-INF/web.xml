@@ -10,8 +10,18 @@
   	<description></description>
   	<servlet-class>org.sincrono.bet.miaServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>MiaServlet2</servlet-name>
+  	<display-name>MiaServlet2</display-name>
+  	<description></description>
+  	<servlet-class>org.sincrono.bet.MiaServlet2</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>miaServlet</servlet-name>
   	<url-pattern>/miaServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>MiaServlet2</servlet-name>
+  	<url-pattern>/MiaServlet2</url-pattern>
   </servlet-mapping>
 </web-app>
