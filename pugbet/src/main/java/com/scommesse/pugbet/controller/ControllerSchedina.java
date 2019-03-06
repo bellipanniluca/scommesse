@@ -64,7 +64,7 @@ public class ControllerSchedina {
 		Schedina copia = (Schedina)session.getAttribute("schedina");
 		Utente u =(Utente)session.getAttribute("utente");
 		i++;
-		double importo=0;
+		double importo;
 		try {
 			importo = (double)session.getAttribute("importo");
 			if(importo>u.getSaldo()) {
@@ -110,6 +110,7 @@ public class ControllerSchedina {
 		session.setAttribute("copie", copie);
 		
 		session.setAttribute("schedina", new Schedina());
+		session.setAttribute("importo", null);
 		
 		return "redirect:/riepilogo";
 }
@@ -254,6 +255,17 @@ public class ControllerSchedina {
 		giocata.setId(idPartita);
 		giocata.setQuotaSelezionata(quotaSel);
 		giocata.setTipo(tipo);
+		
+		for(Giocata g : schedina.getListaGiocate()) {
+			if(idPartita == g.getId() && quotaSel.equals(g.getQuotaSelezionata()))
+				if(tipo.equals("calcio")) 
+					return "redirect:/";
+				else
+					if(tipo.equals("basket"))
+						return "redirect:/basket";
+					else
+						return "redirect:/hockey";
+		}
 		
 		
 		
