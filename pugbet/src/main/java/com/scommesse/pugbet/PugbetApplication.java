@@ -1,4 +1,4 @@
-ùpackage com.scommesse.pugbet;
+package com.scommesse.pugbet;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
