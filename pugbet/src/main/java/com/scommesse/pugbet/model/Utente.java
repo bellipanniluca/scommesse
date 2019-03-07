@@ -5,8 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="utenti")
 public class Utente {
 	
 	@Id
@@ -21,72 +23,82 @@ public class Utente {
 	
 	private String psswrd;
 	
+	
 	private double bilancio; 
+	
 	
 	private double saldo;
 	
+	
+	
+	@Column(name="saldo")
 	public double getSaldo() {
 		return saldo;
 	}
 
-	@Column(name="saldo")
+	
 	public void setSaldo(double saldo) {
 		this.saldo = saldo;
 	}
 
-
+	@Column(name="bilancio")
 	public double getBilancio() {
 		return bilancio;
 	}
 	
-	@Column(name="bilancio")
+	
 	public void setBilancio(double bilancio) {
 		this.bilancio = bilancio;
 	}
 
+	@Column(name="id")
 	public Integer getId() {
 		
 		return id;
 	}
 	
-	@Column(name="id")
+	
 	public void setId(Integer id) {
 		
 		this.id=id;
 	}
 	
+	@Column(name="nome")
 	public String getNome() {
 		return nome;
 	}
 	
-	@Column(name="nome")
+	
 	public void setNome(String nome) {
 		this.nome=nome;
 	}
 	
+	@Column(name="cognome")
 	public String getCognome() {
 		return cognome;
 	}
 
-	@Column(name="cognome")
+	
 	public void setCognome(String cognome) {
 		this.cognome = cognome;
 	}
 
+	@Column(name="pw")
 	public String getPsswrd() {
 		return psswrd;
 	}
 
-	@Column(name="pw")
+	
 	public void setPsswrd(String psswrd) {
 		this.psswrd = psswrd;
 	}
 
+	@Column(name="email")
 	public String getEmail() {
 		return email;
 	}
 	
-	@Column(name="email")
+	
 	public void setEmail(String email) {
 		this.email=email;
 	}
