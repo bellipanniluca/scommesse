@@ -9,22 +9,19 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.scommesse.pugbet.model.Partita;
-import com.scommesse.pugbet.model.PartitaService;
-
 @Controller
-@RequestMapping(path="/")
+
 
 public class MyController {
 	
-//	@Autowired
-//	PartitaService ps;
+	@Autowired
+	PartitaService ps;
 	
-	@RequestMapping(value="/index")
+	@RequestMapping(value="/")
 	public String showHomePage(Model model){
 		
-//		List<Partita> p = ps.findAll();
-//		model.addAttribute("att", p);
+		List<Partita> p = ps.findAll();
+		model.addAttribute("att", p);
 		
 		return "index";
 		}
