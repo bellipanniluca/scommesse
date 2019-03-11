@@ -43,10 +43,10 @@
                   </div>
                   <form class="user" method="post" action="/accedi">
                     <div class="form-group">
-                      <input type="email" class="form-control form-control-user" name="inputEmail" aria-describedby="emailHelp" placeholder="Inserisci il tuo Indirizzo Email...">
+                      <input type="email" class="form-control form-control-user" name="email" aria-describedby="emailHelp" placeholder="Inserisci il tuo Indirizzo Email...">
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control form-control-user" name="inputPassword" placeholder="Password">
+                      <input type="password" class="form-control form-control-user" name="psswrd" placeholder="Password">
                     </div>
                     <div class="form-group">
                       <div class="custom-control custom-checkbox small">

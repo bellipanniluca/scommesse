@@ -20,7 +20,7 @@ public class ControllerRegister {
 	    						@RequestParam("email") String email,
 	    						@RequestParam("psswrd") String pw) {
 	    	
-	    	
+	    	if(us.findByEmail(email).getId()==null) {
 	    	Utente u = new Utente();
 	    	u.setBilancio(0);
 	    	u.setSaldo(0);
@@ -31,9 +31,13 @@ public class ControllerRegister {
 	    	System.out.println(u.getNome()+u.getCognome());
 	    	
 	    	us.save(u);
+	    	}
+	    	else {
+	    		System.out.println("errore"); //Cosa fare se è già registrato
+	    	}
 	    	
 	    	
-	        return "index";
+	        return "redirect:/";
 	    }
 
 }
