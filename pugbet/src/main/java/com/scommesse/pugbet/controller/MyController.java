@@ -9,22 +9,35 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+
 @Controller
 
 
 public class MyController {
 	
 	@Autowired
-	PartitaService ps;
+	PartitaCalcioService pcs;
+	
+	@Autowired
+	PartitaBasketService pbs;
+	
+	@Autowired
+	PartitaHockeyService phs;
 	
 	@RequestMapping(value="/")
 	public String showHomePage(Model model){
 		
-		List<Partita> p = ps.findAll();
+		List<PartitaCalcio> p = pcs.findAll();
 		model.addAttribute("att", p);
 		
 		return "index";
 		}
+	
+	@RequestMapping(value="/prova", method = RequestMethod.GET)
+	public String showProvaPage(ModelMap model){
+		return "prova";
+		}
+	
 	
 	@RequestMapping(value="/login", method = RequestMethod.GET)
 	public String showLoginPage(ModelMap model){
@@ -41,10 +54,18 @@ public class MyController {
 		}
 	@RequestMapping(value="/basket", method = RequestMethod.GET)
 	public String showBasketPage(ModelMap model){
+		
+		List<PartitaBasket> p = pbs.findAll();
+		model.addAttribute("att", p);
+		
 		return "basket";
 		}
 	@RequestMapping(value="/hockey", method = RequestMethod.GET)
 	public String showHockeyPage(ModelMap model){
+		
+		List<PartitaHockey> p = phs.findAll();
+		model.addAttribute("att", p);
+		
 		return "hockey";
 		}
 

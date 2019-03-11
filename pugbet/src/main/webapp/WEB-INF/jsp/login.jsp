@@ -41,12 +41,12 @@
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4"> Accedi </h1>
                   </div>
-                  <form class="user">
+                  <form class="user" method="post" action="/accedi">
                     <div class="form-group">
-                      <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Inserisci il tuo Indirizzo Email...">
+                      <input type="email" class="form-control form-control-user" name="inputEmail" aria-describedby="emailHelp" placeholder="Inserisci il tuo Indirizzo Email...">
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
+                      <input type="password" class="form-control form-control-user" name="inputPassword" placeholder="Password">
                     </div>
                     <div class="form-group">
                       <div class="custom-control custom-checkbox small">
@@ -54,6 +54,7 @@
                         <label class="custom-control-label" for="customCheck"> Ricordami </label>
                       </div>
                     </div>
+                    <input type="submit" value="login">
                     <a href="/index" class="btn btn-primary btn-user btn-block">
                       Login
                     </a>

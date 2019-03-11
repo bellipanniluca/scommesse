@@ -9,8 +9,6 @@ public class Schedina {
 	public Schedina() {
 		
 		super();
-		
-		listaGiocate=new ArrayList();
 	}
 
 	public ArrayList<Giocata> getListaGiocate() {

@@ -183,22 +183,25 @@
                   </thead>
                   <tbody>
                   
+                  <form id="f" method="get" action="/add">
+                  
                   <c:forEach items="${att}" var="x">
-	
+					
+					
 					<tr>
 					<td>${x.anno}</td>
 					<td>${x.giorno}</td>
 					<td>${x.mese}</td>
 					<td>${x.casa}</td>
 					<td>${x.trasferta}</td>
-					<td><button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" type="button">${x.home}</button></td>
-					<td><button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" type="button">${x.x}</button></td>
-					<td><button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" type="button">${x.away}</button></td>
+					<td><button form="f" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" type="submit" name="home" value = "H" data-value=${x.id } >${x.home}</button></td>
+					<td><button form="f" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" type="submit" name="x" value = "X">${x.x}</button></td>
+					<td><button form="f" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" type="submit" name="away" value = "A">${x.away}</button></td>
 	
-	
+				
 					</tr>
 				</c:forEach>
-                  
+                 </form>
                   </tbody>
                 </table>
               </div>

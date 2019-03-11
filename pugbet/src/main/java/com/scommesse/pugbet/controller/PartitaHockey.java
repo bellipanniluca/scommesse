@@ -8,8 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="calcio")
-public class Partita {
+@Table(name="hockey")
+public class PartitaHockey {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -26,21 +26,19 @@ public class Partita {
 	@Column
 	private String trasferta;
 	
-	@Column
+	@Column(name="`1`")
 	private double home;
-	@Column
-	private double x;
-	@Column
+	@Column(name="`2`")
 	private double away;
 	
 	
 	
-	public Partita() {
+	public PartitaHockey() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Partita(Integer id, Integer anno, Integer giorno, String mese, String casa, String trasferta, double home,
-			double x, double away) {
+	public PartitaHockey(Integer id, Integer anno, Integer giorno, String mese, String casa, String trasferta, double home,
+			 double away) {
 		super();
 		this.id = id;
 		this.anno = anno;
@@ -49,7 +47,6 @@ public class Partita {
 		this.casa = casa;
 		this.trasferta = trasferta;
 		this.home = home;
-		this.x = x;
 		this.away = away;
 	}
 	public Integer getId() {
@@ -94,12 +91,7 @@ public class Partita {
 	public void setHome(double home) {
 		this.home = home;
 	}
-	public double getX() {
-		return x;
-	}
-	public void setX(double x) {
-		this.x = x;
-	}
+	
 	public double getAway() {
 		return away;
 	}

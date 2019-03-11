@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -170,23 +171,30 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>Name</th>
-                      <th>Position</th>
-                      <th>Office</th>
-                      <th>Age</th>
-                      <th>Start date</th>
-                      <th>Salary</th>
+                      <th>Anno</th>
+                      <th>Giorno</th>
+                      <th>Mese</th>
+                      <th>Squadra Casa</th>
+                      <th>Squadra Trasferta</th>
+                      <th>1</th>
+                      <th>2</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>Tiger Nixon</td>
-                      <td>System Architect</td>
-                      <td>Edinburgh</td>
-                      <td>61</td>
-                      <td>2011/04/25</td>
-                      <td>$320,800</td>
-                    </tr>
+                    <c:forEach items="${att}" var="x">
+	
+					<tr>
+					<td>${x.anno}</td>
+					<td>${x.giorno}</td>
+					<td>${x.mese}</td>
+					<td>${x.casa}</td>
+					<td>${x.trasferta}</td>
+					<td><button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" type="button">${x.home}</button></td>
+					<td><button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" type="button">${x.away}</button></td>
+	
+	
+					</tr>
+				</c:forEach>
                   
                   </tbody>
                 </table>
