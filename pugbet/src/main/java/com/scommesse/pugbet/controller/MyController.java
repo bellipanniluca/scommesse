@@ -9,6 +9,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.scommesse.pugbet.model.Giocata;
+
 
 @Controller
 
@@ -33,9 +35,10 @@ public class MyController {
 		return "index";
 		}
 	
-	@RequestMapping(value="/prova", method = RequestMethod.GET)
+	@RequestMapping(value="/add")
 	public String showProvaPage(ModelMap model){
-		return "prova";
+		
+		return "redirect:/";
 		}
 	
 	

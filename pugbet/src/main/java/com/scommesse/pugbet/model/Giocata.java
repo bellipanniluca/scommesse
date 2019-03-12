@@ -13,7 +13,35 @@ public class Giocata {
 	
 	private String quotaSelezionata;
 	
+	private double quotaValore;
 	
+	private String tipo;
+	
+	
+
+	public String getTipo() {
+		return tipo;
+	}
+
+
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+
+
+	public double getQuotaValore() {
+		return quotaValore;
+	}
+
+
+
+	public void setQuotaValore(double quotaValore) {
+		this.quotaValore = quotaValore;
+	}
+
+
 
 	public Giocata(Integer id, String casa, String trasferta, boolean esito, String quotaSelezionata) {
 		super();

@@ -183,25 +183,28 @@
                   </thead>
                   <tbody>
                   
-                  <form id="f" method="get" action="/add">
+                  
                   
                   <c:forEach items="${att}" var="x">
 					
-					
+				  <form id=${x.id } method="get" action="/addSchedina">
+				  <input form = ${x.id } type="hidden" name="idPartita" value=${x.id }>
+				  <input form = ${x.id } type="hidden" name="tipo" value="calcio">
 					<tr>
 					<td>${x.anno}</td>
 					<td>${x.giorno}</td>
 					<td>${x.mese}</td>
 					<td>${x.casa}</td>
 					<td>${x.trasferta}</td>
-					<td><button form="f" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" type="submit" name="home" value = "H" data-value=${x.id } >${x.home}</button></td>
-					<td><button form="f" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" type="submit" name="x" value = "X">${x.x}</button></td>
-					<td><button form="f" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" type="submit" name="away" value = "A">${x.away}</button></td>
+					<td><button form=${x.id } class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" type="submit" name="quotaSel" value = "H" >${x.home}</button></td>
+					<td><button form=${x.id } class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" type="submit" name="quotaSel" value = "X">${x.x}</button></td>
+					<td><button form=${x.id } class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" type="submit" name="quotaSel" value = "A">${x.away}</button></td>
 	
 				
 					</tr>
+					</form>
 				</c:forEach>
-                 </form>
+                 
                   </tbody>
                 </table>
               </div>

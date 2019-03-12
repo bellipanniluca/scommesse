@@ -182,6 +182,10 @@
                   </thead>
                   <tbody>
                     <c:forEach items="${att}" var="x">
+                    
+                    <form id=${x.id } method="get" action="/addSchedina">
+				  	<input form = ${x.id } type="hidden" name="idPartita" value=${x.id }>
+				  	<input form = ${x.id } type="hidden" name="tipo" value="basket">
 	
 					<tr>
 					<td>${x.anno}</td>
@@ -189,11 +193,12 @@
 					<td>${x.mese}</td>
 					<td>${x.casa}</td>
 					<td>${x.trasferta}</td>
-					<td><button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" type="button">${x.home}</button></td>
-					<td><button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" type="button">${x.away}</button></td>
+					<td><button form=${x.id } class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" type="submit" name="quotaSel" value = "H" >${x.home}</button></td>
+					<td><button form=${x.id } class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" type="submit" name="quotaSel" value = "A">${x.away}</button></td>
 	
 	
 					</tr>
+					</form>
 				</c:forEach>
                   
                   </tbody>
