@@ -56,7 +56,7 @@
                     <input type="password" class="form-control form-control-user" id="password" placeholder="Password" name="psswrd">
                   </div>
                   <div class="col-sm-6">
-                    <input type="password" class="form-control form-control-user" id="password2" placeholder="Ripeti Password">
+                    <input type="password" class="form-control form-control-user" id="password2" placeholder="Ripeti Password" name="psswrd2">
                   </div>
                   <div class="form-group">
                       <div class="custom-control custom-checkbox small">
@@ -65,10 +65,8 @@
                       </div>
                     </div>
                   </div>
-                 <input type="submit" value="Registra"/>
-                <a href="/login" class="btn btn-primary btn-user btn-block">
-                  Registra Account
-                </a>
+                 <input type="submit" value="Registra Account" class="btn btn-primary btn-user btn-block">
+               
               </form>
               <hr>
               <div class="text-center">

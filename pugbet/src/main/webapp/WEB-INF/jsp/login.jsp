@@ -54,10 +54,8 @@
                         <label class="custom-control-label" for="customCheck"> Ricordami </label>
                       </div>
                     </div>
-                    <input type="submit" value="login">
-                    <a href="/index" class="btn btn-primary btn-user btn-block">
-                      Login
-                    </a>
+                    <input type="submit" value="Login" class="btn btn-primary btn-user btn-block">
+                    
                   </form>
                   <hr>
                   <div class="text-center">

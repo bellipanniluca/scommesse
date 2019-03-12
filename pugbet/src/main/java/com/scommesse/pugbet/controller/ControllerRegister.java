@@ -18,26 +18,33 @@ public class ControllerRegister {
 	    public String addUtente(@RequestParam("nome") String nome,
 	    						@RequestParam("cognome") String cognome,
 	    						@RequestParam("email") String email,
-	    						@RequestParam("psswrd") String pw) {
+	    						@RequestParam("psswrd") String pw,
+	    						@RequestParam("psswrd2") String pw2) {
+	    	if(pw.equals(pw2)) {
+	    		if(us.findByEmail(email)==null) {
+	    			Utente u = new Utente();
+	    			u.setBilancio(0);
+	    			u.setSaldo(0);
+	    			u.setNome(nome);
+	    			u.setCognome(cognome);
+	    			u.setEmail(email);
+	    			u.setPw(pw);
+	    			System.out.println(u.getNome()+u.getCognome());
 	    	
-	    	if(us.findByEmail(email).getId()==null) {
-	    	Utente u = new Utente();
-	    	u.setBilancio(0);
-	    	u.setSaldo(0);
-	    	u.setNome(nome);
-	    	u.setCognome(cognome);
-	    	u.setEmail(email);
-	    	u.setPw(pw);
-	    	System.out.println(u.getNome()+u.getCognome());
-	    	
-	    	us.save(u);
+	    			us.save(u);
+	    			return "redirect:/";
+	    		}
+	    		else {
+	    			System.out.println("errore"); //Cosa fare se è già registrato
+	    			return "redirect:/register";
+	    		}
 	    	}
 	    	else {
-	    		System.out.println("errore"); //Cosa fare se è già registrato
+	    		System.out.println("errore scemo");
+	    		return "redirect:/register";
 	    	}
 	    	
-	    	
-	        return "redirect:/";
+	        
 	    }
 
 }
