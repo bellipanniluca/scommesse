@@ -32,31 +32,124 @@ public class ControllerSchedina {
 	@Autowired
 	PartitaHockeyService phs;
 	
-	Schedina schedina = new Schedina();
+	@Autowired
+	SchedinaFinaleService sfs;
+	
+	@Autowired
+	UtenteService us;
+	
+	
 	
 	@RequestMapping(value = "/scommetti", method = RequestMethod.GET)
 	public String scommetti(Model model, HttpSession session) {
 		
 		SchedinaFinale schedinaCorr = new SchedinaFinale();
 		Schedina s = (Schedina)session.getAttribute("schedina");
+		Utente u =(Utente)session.getAttribute("utente");
+		
+		double importo = 2;
 		
 		schedinaCorr.setData(LocalDate.now());
 		schedinaCorr.setQuota(s.getQuotaTotale());
-		schedinaCorr.setImporto(2);
-		schedinaCorr.setVincita(100);
+		schedinaCorr.setImporto(importo);
+		schedinaCorr.setVincita(s.getQuotaTotale()*importo);
+		schedinaCorr.setIdUtente(u.getId());
 		
+		u.setBilancio(u.getBilancio() - importo);
+		u.setSaldo(u.getSaldo() - importo);
+		us.save(u);
+		
+		session.setAttribute("schedinaCorr", schedinaCorr);
+		session.setAttribute("utente", u);
 		
 		return "redirect:/";
 	}
 	
+	@RequestMapping(value = "/risultati", method = RequestMethod.GET)
+	public String risultati(Model model, HttpSession session) {
+		
+		Utente u = (Utente)session.getAttribute("utente");
+		SchedinaFinale sf = (SchedinaFinale)session.getAttribute("schedinaCorr");
+		
+		Schedina schedina = (Schedina)session.getAttribute("schedina");
+		boolean esitoTot = true;
+		
+		for(Giocata giocata : schedina.getListaGiocate()) {
+			
+			String risultato;
+			
+			switch(giocata.getTipo()) {
+			
+				case "calcio":{
+					int id = giocata.getId();
+					risultato = pcs.findById(id).getEsito();
+					if(!giocata.getQuotaSelezionata().equals(risultato)) 
+						esitoTot = false;
+					break;
+					
+				}
+				case "basket":{
+					int id = giocata.getId();
+					risultato = pbs.findById(id).getEsito();
+					if(!giocata.getQuotaSelezionata().equals(risultato)) 
+						esitoTot = false;
+					break;
+					
+				}
+				case "hockey":{
+					int id = giocata.getId();
+					risultato = phs.findById(id).getEsito();
+					if(!giocata.getQuotaSelezionata().equals(risultato)) 
+						esitoTot = false;
+					break;
+				}
+				
+			}
+			
+		}
+		
+		
+		
+		
+		if(esitoTot) {
+			
+			sf.setEsito("Vincente");
+			sfs.save(sf);
+			double b = (u.getBilancio() + sf.getVincita())*100;
+			double c = (u.getSaldo() + sf.getVincita())*100;
+			b = Math.round(b);
+			c = Math.round(c);
+			u.setBilancio(b/100);
+			u.setSaldo(c/100);
+			us.save(u);
+			
+		}
+		else {
+			
+			sf.setEsito("Perdente");
+			sfs.save(sf);
+			
+		}
+		
+		sf = null;
+		Schedina s = new Schedina();
+
+		
+		session.setAttribute("schedinaCorr", sf);
+		session.setAttribute("schedina", s);
+		
+		
+		return "redirect:/riepilogo";
+	}
+	
 	
 	@RequestMapping(value = "/addSchedina", method = RequestMethod.GET)
-	public void addSchedina(Model model, @RequestParam("idPartita") int idPartita,
+	public String addSchedina(Model model, @RequestParam("idPartita") int idPartita,
 										   @RequestParam("tipo") String tipo,
 										   @RequestParam("quotaSel") String quotaSel,
-										   HttpSession session,
-										   HttpServletResponse response,
-										   HttpServletRequest request) {
+										   HttpSession session) {
+		
+		Schedina schedina = (Schedina)session.getAttribute("schedina");
 		Giocata giocata = new Giocata();
 		double quotaVal;
 		double quotaTot;
@@ -146,6 +239,8 @@ public class ControllerSchedina {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
-		//return "redirect:/";
+		return "redirect:/";
+			
+		
 	}
 }

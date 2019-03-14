@@ -6,28 +6,7 @@
 
 <head>
 
-<script type="text/javascript">
-	function funzione(){
-		
-		var nome=document.getElementById("bb").value;
-    	//alert(nome);
-		var xhttp=new XMLHttpRequest();
-		
-		xhttp.onreadystatechange = function() {
-		    if (this.readyState == 4 && this.status == 200) {
-		    	
-		    	
-		    	document.getElementById("para").innerHTML =this.responseText;
-		    
-		    }
-		  };
-		  xhttp.open("GET", "/prova?pa=" +nome, true);
-		  xhttp.send();
-		
-		
-		
-	}
-</script>
+
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -131,11 +110,10 @@
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
-		<button id="b" value="prova" onclick="funzione()">Prova</button>
-		<h1 class="h3 mb-0 text-gray-800" id="para"> prova</h1>
+		
 		<c:if test="${not empty utente}">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800" id="paraa"> prova</h1>
+            
             <a href="/scommetti" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Scommetti</a>
             <a href="/riepilogo" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Riepilogo Scommesse</a>
           	
@@ -226,8 +204,8 @@
                   
                   <c:forEach items="${att}" var="x">
 					
-					<button onclick="funzione()" id="bb" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" name="quotaSel" >${x.home}p</button>
-				  <form id=${x.id } method="get" >
+				
+				  <form id=${x.id } method="get" action="/addSchedina">
 				  <input form = ${x.id } type="hidden" name="idPartita" value=${x.id }>
 				  <input form = ${x.id } type="hidden" name="tipo" value="calcio">
 					<tr>

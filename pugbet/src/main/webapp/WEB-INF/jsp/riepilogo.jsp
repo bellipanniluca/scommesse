@@ -178,17 +178,17 @@
                   </thead>
                   <tbody>
                   
+                  <c:if test="${not empty schedinaCorr }">
                   <tr>
-					<td>${x.codice}</td>
-					<td>${x.data}</td>
-					<td>${x.quota}</td>
-					<td>${x.importo}</td>
-					<td>${x.vincita}</td>
-					<td>${x.esito}</td>
+					<td> </td>
+					<td>${schedinaCorr.data}</td>
+					<td>${schedinaCorr.quota}</td>
+					<td>${schedinaCorr.importo}</td>
+					<td>${schedinaCorr.vincita}</td>
+					<td><a href="/risultati" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Vedi Risultati</a></td>
 					
-	
-				
 					</tr>
+				 </c:if>
                   
                   <c:forEach items="${schedinaFin}" var="x">
 					

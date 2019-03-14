@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.scommesse.pugbet.model.Schedina;
+
 @Controller
 public class ControllerLogin {
 	
@@ -28,6 +30,8 @@ public class ControllerLogin {
 			
 			System.out.println(utente.getNome() +"loggato");
 			session.setAttribute("utente", utente);
+			Schedina s = new Schedina();
+			session.setAttribute("schedina", s);
 			return "redirect:/";
 		}
 		else {

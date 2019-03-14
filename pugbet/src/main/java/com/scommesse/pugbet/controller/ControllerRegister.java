@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.scommesse.pugbet.model.Schedina;
+
 @Controller
 public class ControllerRegister {
 	
@@ -36,6 +38,8 @@ public class ControllerRegister {
 	    	
 	    			us.save(u);
 	    			session.setAttribute("utente", u);
+	    			Schedina s = new Schedina();
+	    			session.setAttribute("schedina", s);
 	    			return "redirect:/";
 	    		}
 	    		else {
