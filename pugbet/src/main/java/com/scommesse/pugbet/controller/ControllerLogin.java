@@ -1,5 +1,7 @@
 package com.scommesse.pugbet.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +17,8 @@ public class ControllerLogin {
 	
 	@RequestMapping(value="/accedi", method = RequestMethod.POST)
 	public String accedi(@RequestParam("email") String email,
-						 @RequestParam("psswrd") String pw){
+						 @RequestParam("psswrd") String pw,
+						 HttpSession session){
 		
 		Utente utente = new Utente();
 		
@@ -24,6 +27,7 @@ public class ControllerLogin {
 			utente = us.findByEmail(email);
 			
 			System.out.println(utente.getNome() +"loggato");
+			session.setAttribute("utente", utente);
 			return "redirect:/";
 		}
 		else {

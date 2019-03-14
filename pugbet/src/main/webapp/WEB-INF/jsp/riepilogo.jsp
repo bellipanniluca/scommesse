@@ -6,6 +6,8 @@
 
 <head>
 
+
+
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -36,32 +38,20 @@
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3"> PUGBET </div>
+        <div class="sidebar-brand-text mx-3">PUGBET</div>
         </h2>
-		<c:if test="${empty utente}">
+
       <!-- Divider -->
       <hr class="sidebar-divider">
 
       <!-- Nav Item - Accedi -->
       <li class="nav-item">
-        <a class="nav-link" href="/login">
+        <a class="nav-link" href="/">
           <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Accedi</span></a>
+          <span>Home</span></a>
       </li>
       
-       <!-- Divider -->
-      <hr class="sidebar-divider my-0">
-
-      <!-- Nav Item - Registrati -->
-      <li class="nav-item">
-        <a class="nav-link" href="/register">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Registrati</span></a>
-      </li>
       
-      <!-- Divider -->
-      <hr class="sidebar-divider">
-      </c:if>
     </ul>
     <!-- End of Sidebar -->
 
@@ -81,10 +71,10 @@
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
 
-            <c:if test="${not empty utente}">
+            
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
-              <a class="nav-link dropdown-toggle"  id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">${utente.nome } ${utente.cognome }</span>
                 
               </a>
@@ -96,7 +86,7 @@
                 
             <a href="/logout" class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm">Logout</a>
             </li>
-			</c:if>
+
           </ul>
 
         </nav>
@@ -104,112 +94,119 @@
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
-		
-		<c:if test="${not empty utente}">
-         
+
+        
 		<div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800"> </h1>
-            <a href="/riepilogo" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Riepilogo Scommesse</a>
+            <h1 class="h3 mb-0 text-white-800"></h1>
           </div>
-        </c:if>
+        
         <!-- /.container-fluid -->
         
         <!-- Content Row -->
           <div class="  row">
 
-            <!-- Carta Calcio -->
+            <!-- Carta Saldo -->
            
-            <div class="col-xl-3 col-md-6 mb-4"><a href="/">
+            <div class="col-xl-3 col-md-6 mb-4">
               <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Calcio</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">Serie A</div>
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Saldo Conto</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"> ${utente.saldo } euro</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-calendar fa-2x text-gray-300"></i>
                     </div>
                   </div>
                 </div>
-              </div></a>
+              </div>
             </div>
 		
-            <!-- Carta Basket -->
-            <div class="col-xl-3 col-md-6 mb-4"><a href="/basket">
+            <!-- Carta Bilancio -->
+            <div class="col-xl-3 col-md-6 mb-4">
               <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Basketball</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">NBA</div>
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Bilancio</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">${utente.bilancio } euro</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                     </div>
                   </div>
                 </div>
-              </div></a>
+              </div>
             </div>
 
 
-            <!-- Carta Hockey -->
-            <div class="col-xl-3 col-md-6 mb-4"> <a href="/hockey">
+            <!-- Carta Numero Scommesse -->
+            <div class="col-xl-3 col-md-6 mb-4">
               <div class="card border-left-warning shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Ice Hockey</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">KHL</div>
+                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Numero Scommesse</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"># ${nScommesse }</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-comments fa-2x text-gray-300"></i>
                     </div>
                   </div>
                 </div>
-              </div></a>
+              </div>
             </div>
           </div>
 
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Basket</h6>
+              <h6 class="m-0 font-weight-bold text-primary">Riepilogo Scommesse</h6>
             </div>
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>Anno</th>
-                      <th>Giorno</th>
-                      <th>Mese</th>
-                      <th>Squadra Casa</th>
-                      <th>Squadra Trasferta</th>
-                      <th>1</th>
-                      <th>2</th>
+                      <th>Codice</th>
+                      <th>Data</th>
+                      <th>Quota</th>
+                      <th>Importo</th>
+                      <th>Vincita</th>
+                      <th>Esito</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <c:forEach items="${att}" var="x">
-                    
-                    <form id=${x.id } method="get" action="/addSchedina">
-				  	<input form = ${x.id } type="hidden" name="idPartita" value=${x.id }>
-				  	<input form = ${x.id } type="hidden" name="tipo" value="basket">
+                  
+                  <tr>
+					<td>${x.codice}</td>
+					<td>${x.data}</td>
+					<td>${x.quota}</td>
+					<td>${x.importo}</td>
+					<td>${x.vincita}</td>
+					<td>${x.esito}</td>
+					
 	
+				
+					</tr>
+                  
+                  <c:forEach items="${schedinaFin}" var="x">
+					
+				  <form method="get" action="/addSchedina">
 					<tr>
-					<td>${x.anno}</td>
-					<td>${x.giorno}</td>
-					<td>${x.mese}</td>
-					<td>${x.casa}</td>
-					<td>${x.trasferta}</td>
-					<td><button form=${x.id } class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" type="submit" name="quotaSel" value = "H" >${x.home}</button></td>
-					<td><button form=${x.id } class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" type="submit" name="quotaSel" value = "A">${x.away}</button></td>
+					<td>${x.codice}</td>
+					<td>${x.data}</td>
+					<td>${x.quota}</td>
+					<td>${x.importo}</td>
+					<td>${x.vincita}</td>
+					<td>${x.esito}</td>
+					
 	
-	
+				
 					</tr>
 					</form>
 				</c:forEach>
-                  
+                 
                   </tbody>
                 </table>
               </div>
@@ -239,7 +236,24 @@
     <i class="fas fa-angle-up"></i>
   </a>
 
- 
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>

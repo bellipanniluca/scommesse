@@ -6,6 +6,29 @@
 
 <head>
 
+<script type="text/javascript">
+	function funzione(){
+		
+		var nome=document.getElementById("bb").value;
+    	//alert(nome);
+		var xhttp=new XMLHttpRequest();
+		
+		xhttp.onreadystatechange = function() {
+		    if (this.readyState == 4 && this.status == 200) {
+		    	
+		    	
+		    	document.getElementById("para").innerHTML =this.responseText;
+		    
+		    }
+		  };
+		  xhttp.open("GET", "/prova?pa=" +nome, true);
+		  xhttp.send();
+		
+		
+		
+	}
+</script>
+
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -38,7 +61,7 @@
         </div>
         <div class="sidebar-brand-text mx-3"> PUGBET </div>
         </h2>
-
+		<c:if test="${empty utente}">
       <!-- Divider -->
       <hr class="sidebar-divider">
 
@@ -61,7 +84,7 @@
       
       <!-- Divider -->
       <hr class="sidebar-divider">
-      
+      </c:if>
     </ul>
     <!-- End of Sidebar -->
 
@@ -81,17 +104,26 @@
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
 
-            
+            <c:if test="${not empty utente}">
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
-              <a class="nav-link dropdown-toggle" href="/userPage" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
+            
+            
+              <a class="nav-link dropdown-toggle" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">${utente.nome } ${utente.cognome }</span>
                 
               </a>
               
               
+              
+              
             </li>
-
+            <div class="topbar-divider d-none d-sm-block"></div>
+            <li>
+                
+            <a href="/logout" class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm">Logout</a>
+            </li>
+			</c:if>
           </ul>
 
         </nav>
@@ -99,9 +131,16 @@
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
-
-        
-
+		<button id="b" value="prova" onclick="funzione()">Prova</button>
+		<h1 class="h3 mb-0 text-gray-800" id="para"> prova</h1>
+		<c:if test="${not empty utente}">
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800" id="paraa"> prova</h1>
+            <a href="/scommetti" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Scommetti</a>
+            <a href="/riepilogo" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Riepilogo Scommesse</a>
+          	
+          </div>
+		</c:if>
         
         <!-- /.container-fluid -->
         
@@ -187,7 +226,8 @@
                   
                   <c:forEach items="${att}" var="x">
 					
-				  <form id=${x.id } method="get" action="/addSchedina">
+					<button onclick="funzione()" id="bb" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" name="quotaSel" >${x.home}p</button>
+				  <form id=${x.id } method="get" >
 				  <input form = ${x.id } type="hidden" name="idPartita" value=${x.id }>
 				  <input form = ${x.id } type="hidden" name="tipo" value="calcio">
 					<tr>
@@ -199,7 +239,8 @@
 					<td><button form=${x.id } class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" type="submit" name="quotaSel" value = "H" >${x.home}</button></td>
 					<td><button form=${x.id } class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" type="submit" name="quotaSel" value = "X">${x.x}</button></td>
 					<td><button form=${x.id } class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" type="submit" name="quotaSel" value = "A">${x.away}</button></td>
-	
+					
+					
 				
 					</tr>
 					</form>

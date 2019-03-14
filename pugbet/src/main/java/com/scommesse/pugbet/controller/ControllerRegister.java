@@ -1,6 +1,8 @@
 package com.scommesse.pugbet.controller;
 
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -19,7 +21,8 @@ public class ControllerRegister {
 	    						@RequestParam("cognome") String cognome,
 	    						@RequestParam("email") String email,
 	    						@RequestParam("psswrd") String pw,
-	    						@RequestParam("psswrd2") String pw2) {
+	    						@RequestParam("psswrd2") String pw2,
+	    						HttpSession session) {
 	    	if(pw.equals(pw2)) {
 	    		if(us.findByEmail(email)==null) {
 	    			Utente u = new Utente();
@@ -32,15 +35,16 @@ public class ControllerRegister {
 	    			System.out.println(u.getNome()+u.getCognome());
 	    	
 	    			us.save(u);
+	    			session.setAttribute("utente", u);
 	    			return "redirect:/";
 	    		}
 	    		else {
-	    			System.out.println("errore"); //Cosa fare se è già registrato
+	    			System.out.println("Email già presente"); //Cosa fare se è già registrato
 	    			return "redirect:/register";
 	    		}
 	    	}
 	    	else {
-	    		System.out.println("errore scemo");
+	    		System.out.println("Password diverse");
 	    		return "redirect:/register";
 	    	}
 	    	

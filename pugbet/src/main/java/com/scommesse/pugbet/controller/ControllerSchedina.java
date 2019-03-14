@@ -2,7 +2,13 @@ package com.scommesse.pugbet.controller;
 
 
 
+import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Arrays;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,11 +34,29 @@ public class ControllerSchedina {
 	
 	Schedina schedina = new Schedina();
 	
+	@RequestMapping(value = "/scommetti", method = RequestMethod.GET)
+	public String scommetti(Model model, HttpSession session) {
+		
+		SchedinaFinale schedinaCorr = new SchedinaFinale();
+		Schedina s = (Schedina)session.getAttribute("schedina");
+		
+		schedinaCorr.setData(LocalDate.now());
+		schedinaCorr.setQuota(s.getQuotaTotale());
+		schedinaCorr.setImporto(2);
+		schedinaCorr.setVincita(100);
+		
+		
+		return "redirect:/";
+	}
+	
 	
 	@RequestMapping(value = "/addSchedina", method = RequestMethod.GET)
-	public String addSchedina(Model model, @RequestParam("idPartita") int idPartita,
+	public void addSchedina(Model model, @RequestParam("idPartita") int idPartita,
 										   @RequestParam("tipo") String tipo,
-										   @RequestParam("quotaSel") String quotaSel) {
+										   @RequestParam("quotaSel") String quotaSel,
+										   HttpSession session,
+										   HttpServletResponse response,
+										   HttpServletRequest request) {
 		Giocata giocata = new Giocata();
 		double quotaVal;
 		double quotaTot;
@@ -108,13 +132,20 @@ public class ControllerSchedina {
 		quotaTot = schedina.getQuotaTotale() * giocata.getQuotaValore();
 		quotaTot = Math.round(quotaTot * 100);
 		schedina.setQuotaTotale(quotaTot/100);
-		schedina.getListaGiocate().add(giocata);
+		schedina.add(giocata);
 		
 		System.out.println(giocata.getId() + giocata.getQuotaSelezionata() + giocata.getTipo() + giocata.getQuotaValore());
 		for(Giocata g : schedina.getListaGiocate())
 			System.out.println(g.getQuotaSelezionata());
 		System.out.println(schedina.getQuotaTotale());
 		
-		return "redirect:/";
+		session.setAttribute("schedina", schedina);
+		/*try {
+			response.getWriter().append("prova" + request.getParameter("pa"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		//return "redirect:/";
 	}
 }
