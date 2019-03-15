@@ -45,8 +45,11 @@ public class MyController {
 		List<PartitaCalcio> p = pcs.findAll();
 		model.addAttribute("att", p);
 		
-		if(session == null)
+		if(session.getAttribute("utente") == null) {
+			Schedina s = (Schedina)session.getAttribute("schedina");
+			model.addAttribute("schedina", s);
 			return "index";
+		}
 		else {
 			Utente u = (Utente)session.getAttribute("utente");
 			Schedina s = (Schedina)session.getAttribute("schedina");

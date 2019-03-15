@@ -149,7 +149,13 @@ public class ControllerSchedina {
 										   @RequestParam("quotaSel") String quotaSel,
 										   HttpSession session) {
 		
-		Schedina schedina = (Schedina)session.getAttribute("schedina");
+		Schedina schedina;
+		if(session.getAttribute("schedina") == null) {
+			schedina = new Schedina();
+		}
+		else {
+			schedina = (Schedina)session.getAttribute("schedina");
+		}
 		Giocata giocata = new Giocata();
 		double quotaVal;
 		double quotaTot;
@@ -239,7 +245,13 @@ public class ControllerSchedina {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
-		return "redirect:/";
+		if(tipo.equals("calcio")) 
+			return "redirect:/";
+		else
+			if(tipo.equals("basket"))
+				return "redirect:/basket";
+			else
+				return "redirect:/hockey";
 			
 		
 	}

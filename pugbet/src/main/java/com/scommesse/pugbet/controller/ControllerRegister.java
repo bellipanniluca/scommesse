@@ -38,8 +38,16 @@ public class ControllerRegister {
 	    	
 	    			us.save(u);
 	    			session.setAttribute("utente", u);
-	    			Schedina s = new Schedina();
+	    			
+	    			Schedina s;
+	    			if(session.getAttribute("schedina") == null) {
+	    				s = new Schedina();
+	    			}
+	    			else {
+	    				s = (Schedina)session.getAttribute("schedina");
+	    			}
 	    			session.setAttribute("schedina", s);
+	    			
 	    			return "redirect:/";
 	    		}
 	    		else {
