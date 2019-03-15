@@ -46,15 +46,25 @@ public class MyController {
 		model.addAttribute("att", p);
 		
 		if(session.getAttribute("utente") == null) {
-			Schedina s = (Schedina)session.getAttribute("schedina");
-			model.addAttribute("schedina", s);
+			
+			Schedina schedina;
+			if(session.getAttribute("schedina") == null) {
+				schedina = new Schedina();
+			}
+			else {
+				schedina = (Schedina)session.getAttribute("schedina");
+			}
+			session.setAttribute("schedina", schedina);
+			model.addAttribute("schedina", schedina.getListaGiocate());
+			model.addAttribute("quotaTot", schedina.getQuotaTotale());
 			return "index";
 		}
 		else {
 			Utente u = (Utente)session.getAttribute("utente");
 			Schedina s = (Schedina)session.getAttribute("schedina");
 			model.addAttribute("utente", u);
-			model.addAttribute("schedina", s);
+			model.addAttribute("schedina", s.getListaGiocate());
+			model.addAttribute("quotaTot", s.getQuotaTotale());
 			return "index";
 		}
 		}
@@ -93,15 +103,31 @@ public class MyController {
 		List<PartitaBasket> p = pbs.findAll();
 		model.addAttribute("att", p);
 		
-		if(session == null)
+		if(session.getAttribute("utente") == null) {
+			
+			Schedina schedina;
+			if(session.getAttribute("schedina") == null) {
+				schedina = new Schedina();
+			}
+			else {
+				schedina = (Schedina)session.getAttribute("schedina");
+			}
+			session.setAttribute("schedina", schedina);
+			model.addAttribute("schedina", schedina.getListaGiocate());
+			model.addAttribute("quotaTot", schedina.getQuotaTotale());
 			return "basket";
+		}
 		else {
 			Utente u = (Utente)session.getAttribute("utente");
+			Schedina s = (Schedina)session.getAttribute("schedina");
 			model.addAttribute("utente", u);
+			model.addAttribute("schedina", s.getListaGiocate());
+			model.addAttribute("quotaTot", s.getQuotaTotale());
 			return "basket";
 		}
-		
 		}
+		
+		
 	
 	@RequestMapping(value="/hockey", method = RequestMethod.GET)
 	public String showHockeyPage(ModelMap model, HttpSession session){
@@ -109,14 +135,30 @@ public class MyController {
 		List<PartitaHockey> p = phs.findAll();
 		model.addAttribute("att", p);
 		
-		if(session == null)
+		if(session.getAttribute("utente") == null) {
+			
+			Schedina schedina;
+			if(session.getAttribute("schedina") == null) {
+				schedina = new Schedina();
+			}
+			else {
+				schedina = (Schedina)session.getAttribute("schedina");
+			}
+			session.setAttribute("schedina", schedina);
+			model.addAttribute("schedina", schedina.getListaGiocate());
+			model.addAttribute("quotaTot", schedina.getQuotaTotale());
 			return "hockey";
+		}
 		else {
 			Utente u = (Utente)session.getAttribute("utente");
+			Schedina s = (Schedina)session.getAttribute("schedina");
 			model.addAttribute("utente", u);
+			model.addAttribute("schedina", s.getListaGiocate());
+			model.addAttribute("quotaTot", s.getQuotaTotale());
 			return "hockey";
 		}
 		}
+		
 	
 	@RequestMapping(value="/riepilogo")
 	public String showRiepilogoPage(Model model, HttpSession session) {

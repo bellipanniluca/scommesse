@@ -43,16 +43,19 @@ public class ControllerSchedina {
 	@RequestMapping(value = "/scommetti", method = RequestMethod.GET)
 	public String scommetti(Model model, HttpSession session) {
 		
+		if(session.getAttribute("utente") == null) {
+			return "redirect:/login";
+		}
 		SchedinaFinale schedinaCorr = new SchedinaFinale();
-		Schedina s = (Schedina)session.getAttribute("schedina");
+		Schedina copia = (Schedina)session.getAttribute("schedina");
 		Utente u =(Utente)session.getAttribute("utente");
 		
-		double importo = 2;
+		double importo = (double)session.getAttribute("importo");
 		
 		schedinaCorr.setData(LocalDate.now());
-		schedinaCorr.setQuota(s.getQuotaTotale());
+		schedinaCorr.setQuota(copia.getQuotaTotale());
 		schedinaCorr.setImporto(importo);
-		schedinaCorr.setVincita(s.getQuotaTotale()*importo);
+		schedinaCorr.setVincita(copia.getQuotaTotale()*importo);
 		schedinaCorr.setIdUtente(u.getId());
 		
 		u.setBilancio(u.getBilancio() - importo);
@@ -61,8 +64,12 @@ public class ControllerSchedina {
 		
 		session.setAttribute("schedinaCorr", schedinaCorr);
 		session.setAttribute("utente", u);
+		session.setAttribute("copia", copia);
 		
-		return "redirect:/";
+		session.setAttribute("schedina", new Schedina());
+		
+		
+		return "redirect:/riepilogo";
 	}
 	
 	@RequestMapping(value = "/risultati", method = RequestMethod.GET)
@@ -71,7 +78,7 @@ public class ControllerSchedina {
 		Utente u = (Utente)session.getAttribute("utente");
 		SchedinaFinale sf = (SchedinaFinale)session.getAttribute("schedinaCorr");
 		
-		Schedina schedina = (Schedina)session.getAttribute("schedina");
+		Schedina schedina = (Schedina)session.getAttribute("copia");
 		boolean esitoTot = true;
 		
 		for(Giocata giocata : schedina.getListaGiocate()) {
@@ -136,12 +143,53 @@ public class ControllerSchedina {
 
 		
 		session.setAttribute("schedinaCorr", sf);
-		session.setAttribute("schedina", s);
+		session.setAttribute("copia", s);
 		
 		
 		return "redirect:/riepilogo";
 	}
 	
+	@RequestMapping(value="/delete", method=RequestMethod.GET)
+	public String delete(@RequestParam("btn-match") int idPartita,
+						 @RequestParam("tipo") String tipo,
+						 @RequestParam("pagina") String pagina,
+						 HttpSession session){
+		Schedina schedina = (Schedina)session.getAttribute("schedina");
+		
+		 for(int i=0; i<schedina.getListaGiocate().size();i++) 
+			if(idPartita==schedina.getListaGiocate().get(i).getId() && schedina.getListaGiocate().get(i).getTipo().equals(tipo)) {
+				
+				double quota = schedina.getListaGiocate().get(i).getQuotaValore();
+				double quotaTot = Math.round(schedina.getQuotaTotale()/quota*100);
+				quotaTot = quotaTot/100;
+				schedina.setQuotaTotale(quotaTot);
+				
+				schedina.getListaGiocate().remove(i);
+				
+				
+			}
+		/*for(Giocata giocata : schedina.getListaGiocate()) {
+			if(giocata.getId() == idPartita && giocata.getTipo().equals(tipo))
+				schedina.getListaGiocate().remove(giocata);
+		}*/
+		
+		 if(pagina.equals("calcio")) 
+				return "redirect:/";
+			else if(pagina.equals("basket"))
+					return "redirect:/basket";
+				else
+					return "redirect:/hockey";
+	}
+	
+	@RequestMapping(value="/calcolo", method=RequestMethod.GET)
+	public void calcolo(HttpServletRequest request,HttpServletResponse response, HttpSession session) throws IOException {
+		String s=request.getParameter("pa");
+		double cifra=Double.parseDouble(s);
+		Schedina schedina = (Schedina)session.getAttribute("schedina");
+		response.getWriter().print("Totale: "+cifra*schedina.getQuotaTotale());
+		
+		session.setAttribute("importo", cifra);
+	}
 	
 	@RequestMapping(value = "/addSchedina", method = RequestMethod.GET)
 	public String addSchedina(Model model, @RequestParam("idPartita") int idPartita,
@@ -149,16 +197,14 @@ public class ControllerSchedina {
 										   @RequestParam("quotaSel") String quotaSel,
 										   HttpSession session) {
 		
-		Schedina schedina;
-		if(session.getAttribute("schedina") == null) {
-			schedina = new Schedina();
-		}
-		else {
-			schedina = (Schedina)session.getAttribute("schedina");
-		}
+		
+		Schedina schedina = (Schedina)session.getAttribute("schedina");
+		
 		Giocata giocata = new Giocata();
 		double quotaVal;
 		double quotaTot;
+		String casa;
+		String trasferta;
 		
 		giocata.setId(idPartita);
 		giocata.setQuotaSelezionata(quotaSel);
@@ -175,16 +221,28 @@ public class ControllerSchedina {
 				case "H":{
 					quotaVal = pcs.findById(idPartita).getHome();
 					giocata.setQuotaValore(quotaVal);
+					casa = pcs.findById(idPartita).getCasa();
+					giocata.setCasa(casa);
+					trasferta = pcs.findById(idPartita).getTrasferta();
+					giocata.setTrasferta(trasferta);
 					break;
 				}
 				case "X":{
 					quotaVal = pcs.findById(idPartita).getX();
 					giocata.setQuotaValore(quotaVal);
+					casa = pcs.findById(idPartita).getCasa();
+					giocata.setCasa(casa);
+					trasferta = pcs.findById(idPartita).getTrasferta();
+					giocata.setTrasferta(trasferta);
 					break;
 				}
 				case "A":{
 					quotaVal = pcs.findById(idPartita).getAway();
 					giocata.setQuotaValore(quotaVal);
+					casa = pcs.findById(idPartita).getCasa();
+					giocata.setCasa(casa);
+					trasferta = pcs.findById(idPartita).getTrasferta();
+					giocata.setTrasferta(trasferta);
 					break;
 				}
 				}
@@ -196,12 +254,20 @@ public class ControllerSchedina {
 				case "H":{
 					quotaVal = pbs.findById(idPartita).getHome();
 					giocata.setQuotaValore(quotaVal);
+					casa = pbs.findById(idPartita).getCasa();
+					giocata.setCasa(casa);
+					trasferta = pbs.findById(idPartita).getTrasferta();
+					giocata.setTrasferta(trasferta);
 					break;
 				}
 				
 				case "A":{
 					quotaVal = pbs.findById(idPartita).getAway();
 					giocata.setQuotaValore(quotaVal);
+					casa = pbs.findById(idPartita).getCasa();
+					giocata.setCasa(casa);
+					trasferta = pbs.findById(idPartita).getTrasferta();
+					giocata.setTrasferta(trasferta);
 					break;
 				}
 				}
@@ -213,12 +279,20 @@ public class ControllerSchedina {
 				case "H":{
 					quotaVal = phs.findById(idPartita).getHome();
 					giocata.setQuotaValore(quotaVal);
+					casa = phs.findById(idPartita).getCasa();
+					giocata.setCasa(casa);
+					trasferta = phs.findById(idPartita).getTrasferta();
+					giocata.setTrasferta(trasferta);
 					break;
 				}
 				
 				case "A":{
 					quotaVal = phs.findById(idPartita).getAway();
 					giocata.setQuotaValore(quotaVal);
+					casa = phs.findById(idPartita).getCasa();
+					giocata.setCasa(casa);
+					trasferta = phs.findById(idPartita).getTrasferta();
+					giocata.setTrasferta(trasferta);
 					break;
 				}
 				}
@@ -233,10 +307,10 @@ public class ControllerSchedina {
 		schedina.setQuotaTotale(quotaTot/100);
 		schedina.add(giocata);
 		
-		System.out.println(giocata.getId() + giocata.getQuotaSelezionata() + giocata.getTipo() + giocata.getQuotaValore());
+		/*System.out.println(giocata.getId() + giocata.getQuotaSelezionata() + giocata.getTipo() + giocata.getQuotaValore());
 		for(Giocata g : schedina.getListaGiocate())
 			System.out.println(g.getQuotaSelezionata());
-		System.out.println(schedina.getQuotaTotale());
+		System.out.println(schedina.getQuotaTotale());*/
 		
 		session.setAttribute("schedina", schedina);
 		/*try {
