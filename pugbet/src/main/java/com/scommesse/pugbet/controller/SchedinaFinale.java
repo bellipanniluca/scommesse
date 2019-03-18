@@ -1,5 +1,6 @@
 package com.scommesse.pugbet.controller;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -33,10 +34,10 @@ public class SchedinaFinale {
 	private String esito;
 	
 	@Column
-	private Date data;
+	private LocalDate data;
 
 	public SchedinaFinale(Integer codice, Integer idUtente, double quota, double importo, double vincita, String esito,
-			Date data) {
+			LocalDate data) {
 		super();
 		this.codice = codice;
 		this.idUtente = idUtente;
@@ -100,12 +101,12 @@ public class SchedinaFinale {
 		this.esito = esito;
 	}
 
-	public Date getData() {
+	public LocalDate getData() {
 		return data;
 	}
 
-	public void setData(Date data) {
-		this.data = data;
+	public void setData(LocalDate localDate) {
+		this.data = localDate;
 	}
 	
 	

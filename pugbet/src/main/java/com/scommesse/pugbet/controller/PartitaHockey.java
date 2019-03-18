@@ -31,6 +31,9 @@ public class PartitaHockey {
 	@Column(name="`2`")
 	private double away;
 	
+	@Column
+	private String esito;
+	
 	
 	
 	public PartitaHockey() {
@@ -38,7 +41,7 @@ public class PartitaHockey {
 		// TODO Auto-generated constructor stub
 	}
 	public PartitaHockey(Integer id, Integer anno, Integer giorno, String mese, String casa, String trasferta, double home,
-			 double away) {
+			 double away, String esito) {
 		super();
 		this.id = id;
 		this.anno = anno;
@@ -48,6 +51,15 @@ public class PartitaHockey {
 		this.trasferta = trasferta;
 		this.home = home;
 		this.away = away;
+		this.esito = esito;
+	}
+	
+	
+	public String getEsito() {
+		return esito;
+	}
+	public void setEsito(String esito) {
+		this.esito = esito;
 	}
 	public Integer getId() {
 		return id;

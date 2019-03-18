@@ -38,7 +38,8 @@
         </div>
         <div class="sidebar-brand-text mx-3"> PUGBET </div>
         </h2>
-
+		
+	  <c:if test="${empty utente}">
       <!-- Divider -->
       <hr class="sidebar-divider">
 
@@ -61,7 +62,48 @@
       
       <!-- Divider -->
       <hr class="sidebar-divider">
+      </c:if>
       
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+      
+      <!-- Nav Item - Cart -->
+      <div class="card shadow mb-4">
+          <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Schedina</h6>
+          </div>
+          <div class="card-body">
+          	<div class="table-responsive">
+           		<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+	           		
+	            	<tbody>
+		              	<c:forEach var="giocata" items="${schedina}">
+                       	   <h5>${giocata.tipo}
+                       	   <form method="get" action="/delete"> 
+                       	   		<input type="hidden" name="tipo" value=${giocata.tipo }>
+                       	   		<input type="hidden" name="pagina" value="hockey">
+                   	   			<button type="submit" value=${giocata.id } name="btn-match" class="btn btn-danger btn-circle btn-sm">
+                   	   				<li class="fas fa-trash"></li>
+                   	   			</button>
+                   	   	  </form>
+                       	   </h5>
+                           <p style="font-size:12px">${giocata.casa} vs ${giocata.trasferta}</p>
+                           <p style="font-size:12px">Esito ${giocata.quotaSelezionata}  - Quota ${giocata.quotaValore}</p>
+		                </c:forEach>
+		                <hr>
+		                <c:if test = "${quotaTot > 1 }">
+		                Quota Totale: ${quotaTot}
+		                Importo:  <input size="3" id="importo" name="importo" onkeyup="myFunction()">
+		                <p id="para"></p>
+		            
+		            	<a href="/scommetti" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Scommetti</a>
+		            	</c:if>
+	              	</tbody>
+	             </table>
+	         </div>
+		</div>
+	</div>
+	
     </ul>
     <!-- End of Sidebar -->
 
@@ -81,17 +123,22 @@
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
 
-            
+            <c:if test="${not empty utente}">
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
-              <a class="nav-link dropdown-toggle" href="/userPage" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
+              <a class="nav-link dropdown-toggle" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">${utente.nome } ${utente.cognome }</span>
                 
               </a>
               
               
             </li>
-
+            <div class="topbar-divider d-none d-sm-block"></div>
+            <li>
+                
+            <a href="/logout" class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm">Logout</a>
+            </li>
+			</c:if>
           </ul>
 
         </nav>
@@ -99,9 +146,13 @@
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
-
-         
-
+		
+		<c:if test="${not empty utente}">
+         <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800"> </h1>
+            <a href="/riepilogo" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i>Riepilogo Scommesse</a>
+          </div>
+		</c:if>
         
         <!-- /.container-fluid -->
         
