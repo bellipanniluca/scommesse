@@ -29,7 +29,6 @@ public class ControllerLogin {
 			Utente utente = new Utente();
 			utente = us.findByEmail(email);
 			
-			System.out.println(utente.getNome() +"loggato");
 			session.setAttribute("utente", utente);
 			
 			Schedina s;
