@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+ <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <html lang="en">
 
@@ -36,24 +38,25 @@
               <div class="text-center">
                 <h1 class="h4 text-gray-900 mb-4">Crea un Account!</h1>
               </div>
-              <form class="user">
+              
+				<form class="user" method="post" action="/reg">
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="Nome" name="nome">
+                    <input type="text" class="form-control form-control-user" id="nome" placeholder="Nome" name="nome">
                   </div>
                   <div class="col-sm-6">
-                    <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Cognome" name="cognome">
+                    <input type="text"class="form-control form-control-user" id="cognome" placeholder="Cognome" name="cognome">
                   </div>
                 </div>
                 <div class="form-group">
-                  <input type="email" class="form-control form-control-user" id="exampleInputEmail" placeholder="Email" name="email">
+                  <input type="email" class="form-control form-control-user" id="email" placeholder="Email" name="email">
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password" name="psswrd">
+                    <input type="password" class="form-control form-control-user" id="password" placeholder="Password" name="psswrd">
                   </div>
                   <div class="col-sm-6">
-                    <input type="password" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Ripeti Password">
+                    <input type="password" class="form-control form-control-user" id="password2" placeholder="Ripeti Password" name="psswrd2">
                   </div>
                   <div class="form-group">
                       <div class="custom-control custom-checkbox small">
@@ -62,9 +65,8 @@
                       </div>
                     </div>
                   </div>
-                <a href="/login" class="btn btn-primary btn-user btn-block">
-                  Registra Account
-                </a>
+                 <input type="submit" value="Registra Account" class="btn btn-primary btn-user btn-block">
+               
               </form>
               <hr>
               <div class="text-center">

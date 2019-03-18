@@ -12,7 +12,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Pugebt - Admin Calcio </title>
+  <title>Pugbet - Admin Calcio </title>
 
   <!-- Custom fonts for this template -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -222,12 +222,11 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Benvenuto Amministratore ${admin.nome} !</h1>
-          <p class="mb-4"> Adesso puoi gestire il tuo sito di scommesse! </p>
-          
+          <h1 class="h3 mb-2 text-gray-800"> Gestione Partite: </h1>
+        
            <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary"> Admins </h6>
+              <h6 class="m-0 font-weight-bold text-primary"> Calcio </h6>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -235,22 +234,32 @@
                   <thead>
                     <tr>
                       <th>Id</th>
-                      <th>Nome</th>
-                      <th>Cognome</th>
-                      <th>Email</th>
+                      <th>Anno</th>
+                      <th>Giorno</th>
+                      <th>Mese</th>
+                      <th>Squadra Casa</th>
+                      <th>Squadra Trasferta</th>
+                      <th>1</th>
+                      <th>X</th>
+                      <th>2</th>
                       <th> </th>
                     </tr>
                   </thead>
-                  <c:forEach items="${adm}" var="y"> 
+                  <c:forEach items="${admC}" var="x"> 
                   <tbody>
 					<tr>
-					<td>${y.id}</td>
-					<td>${y.nome}</td>
-					<td>${y.cognome}</td>
-					<td>${y.email}</td>
+					<td>${x.id}</td>
+					<td>${x.anno}</td>
+					<td>${x.giorno}</td>
+					<td>${x.mese}</td>
+					<td>${x.casa}</td>
+					<td>${x.trasferta}</td>
+					<td>${x.home}</td>
+					<td>${x.x}</td>
+					<td>${x.away}</td>
 					<td>
-					<form method="get" action="/deleteAdmin">
-					<input type="hidden" name="idAdmin" value="${y.id }">
+					<form method="get" action="/deleteAdminCalcio">
+					<input type="hidden" name="id" value="${x.id }">
 					<button type="submit" class="btn btn-circle btn-danger">
 					<i class="fas fa-trash"></i>
 					</button>
@@ -269,36 +278,52 @@
 
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
-							<h6 class="m-0 font-weight-bold text-primary">Aggiungi Admins</h6>
+							<h6 class="m-0 font-weight-bold text-primary">Aggiungi Partita</h6>
 						</div>
 						</div>
 
-								<form class="user" method="get" action="/addAdmin">
+								<form class="user" method="get" action="/addCalcio">
+									<div class="form-group row">
+										<div class="col-md-4">
+											<input type="text" class="form-control form-control-user"
+												id="anno" placeholder="Anno" name="anno">
+										</div>
+										<div class="col-md-4">
+											<input type="text" class="form-control form-control-user"
+												id="mese" placeholder="Mese" name="mese">
+										</div>
+										<div class="col-md-4">
+											<input type="text" class="form-control form-control-user"
+												id="giorno" placeholder="Giorno" name="giorno">
+										</div>
+									</div>
+								
 									<div class="form-group row">
 										<div class="col-sm-6 mb-3 mb-sm-0">
 											<input type="text" class="form-control form-control-user"
-												id="nome" placeholder="Nome" name="nome">
+												id="casa" placeholder="Casa" name="casa">
 										</div>
 										<div class="col-sm-6">
 											<input type="text" class="form-control form-control-user"
-												id="cognome" placeholder="Cognome" name="cognome">
+												id="trasferta" placeholder="Trasferta" name="trasferta">
+										</div>
+										</div>
+										
+										<div class="form-group row">
+										<div class="col-md-4">
+											<input type="text" class="form-control form-control-user"
+												id="home" placeholder="Home" name="home">
+										</div>
+										<div class="col-md-4">
+											<input type="text" class="form-control form-control-user"
+												id="x" placeholder="X" name="x">
+										</div>
+										<div class="col-md-4">
+											<input type="text" class="form-control form-control-user"
+												id="away" placeholder="Away" name="away">
 										</div>
 									</div>
-									<div class="form-group">
-										<input type="email" class="form-control form-control-user"
-											id="email" placeholder="Email" name="email">
-									</div>
-									<div class="form-group row">
-										<div class="col-sm-6 mb-3 mb-sm-0">
-											<input type="password" class="form-control form-control-user"
-												id="password" placeholder="Password" name="psswrd">
-										</div>
-										<div class="col-sm-6">
-											<input type="password" class="form-control form-control-user"
-												id="password2" placeholder="Ripeti Password" name="psswrd2">
-										</div>
-									</div>
-									<input type="submit" value="Registra Admin"
+									<input type="submit" value="Registra Partita"
 										class="btn btn-primary btn-user btn-block">
 
 								</form>

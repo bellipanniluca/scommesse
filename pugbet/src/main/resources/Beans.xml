@@ -6,6 +6,6 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd">
      
-    <bean id="utente"    class="com.scommesse.pugbet.model.Utente"></bean>
+    <bean id="utente" class="com.scommesse.pugbet.model.Utente"></bean>
    
 </beans>

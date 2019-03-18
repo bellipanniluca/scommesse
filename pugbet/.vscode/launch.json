@@ -1,0 +1,24 @@
+// Use IntelliSense to learn about possible attributes.
+// Hover to view descriptions of existing attributes.
+// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+{
+    "version": "2.0.0",
+    "configurations": [
+        {
+            "name": "Launch register.html",
+            "type": "chrome",
+            "request": "launch",
+            "webRoot": "${workspaceFolder}",
+            "program": "${workspaceFolder}/src/main/resources/static/register.html",
+            "cwd": "${workspaceFolder}/src/main/resources/static"
+        },
+        {
+            "name": "Launch login.html",
+            "type": "chrome",
+            "request": "launch",
+            "webRoot": "${workspaceFolder}",
+            "program": "${workspaceFolder}/src/main/resources/static/login.html",
+            "cwd": "${workspaceFolder}/src/main/resources/static"
+        }
+    ]
+}

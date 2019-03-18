@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html>
 
@@ -19,7 +20,7 @@
 
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-2.css" rel="stylesheet">
-
+      	
 </head>
 
 <body class="bg-gradient-primary">
@@ -41,12 +42,12 @@
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4"> Accedi </h1>
                   </div>
-                  <form class="user">
+                  <form class="user" method="post" action="/accedi">
                     <div class="form-group">
-                      <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Inserisci il tuo Indirizzo Email...">
+                      <input type="email" class="form-control form-control-user" name="email" aria-describedby="emailHelp" placeholder="Inserisci il tuo Indirizzo Email...">
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
+                      <input type="password" class="form-control form-control-user" name="psswrd" placeholder="Password">
                     </div>
                     <div class="form-group">
                       <div class="custom-control custom-checkbox small">
@@ -54,24 +55,21 @@
                         <label class="custom-control-label" for="customCheck"> Ricordami </label>
                       </div>
                     </div>
-                    <a href="/index" class="btn btn-primary btn-user btn-block">
-                      Login
-                    </a>
+                    <input id="login" onclick="myFunction()" type="submit" value="Login" class="btn btn-primary btn-user btn-block">
                   </form>
                   <hr>
                   <div class="text-center">
                     <a class="small" href="/register"> Crea un Account! </a>
+                    <br>
+                    <a class="small" href="/adminLogin"> Sei amministratore? Entra qui! </a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
       </div>
-
     </div>
-
   </div>
 
   <!-- Bootstrap core JavaScript-->
@@ -87,4 +85,3 @@
 </body>
 
 </html>
-    
