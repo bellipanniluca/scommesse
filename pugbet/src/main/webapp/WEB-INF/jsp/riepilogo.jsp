@@ -36,20 +36,20 @@
       <!-- Sidebar - Brand -->
       <h2 class="sidebar-brand d-flex align-items-center justify-content-center">
         <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
+          <i class="fas fa-paw"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">PUGBET</div>
+        <div class="sidebar-brand-text mx-3"><a class="nav-link text-gray-100" href="/">PUGBET </a></div>
         </h2>
 
       <!-- Divider -->
       <hr class="sidebar-divider">
 
       <!-- Nav Item - Accedi -->
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link" href="/">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Home</span></a>
-      </li>
+      </li> -->
       
       
     </ul>
@@ -64,29 +64,24 @@
         <!-- Topbar -->
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-        
-
-        
-
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
 
-            
+            <c:if test="${not empty utente}">
             <!-- Nav Item - User Information -->
-            <li class="nav-item dropdown no-arrow">
-              <a class="nav-link dropdown-toggle" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">${utente.nome } ${utente.cognome }</span>
-                
-              </a>
-              
-              
-            </li>
-            <div class="topbar-divider d-none d-sm-block"></div>
-            <li>
-                
-            <a href="/logout" class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm">Logout</a>
-            </li>
-
+    	  		<li class="nav-item dropdown ">
+     				<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           				<span class="mr-2 d-none d-lg-inline text-gray-600 small">${utente.nome } ${utente.cognome}</span>  
+           				<img class="rounded-circle" height="32" width="40" src="https://cms-assets.tutsplus.com/uploads/users/127/posts/29412/preview_image/preview.png">    
+           				             
+        			</a>
+        			<div class="dropdown-menu dropdown-menu-right animated--grow-in" aria-labelledby="userDropdown">
+		            	<a class="dropdown-item" href="/riepilogo"><i class="fas fa-list fa-sm fa-fw mr-2 text-gray-800">Riepilogo Scommesse</i></a>
+		            	<a class="dropdown-item" href="/ricaricasaldo"><i class="fas fa-list fa-sm fa-fw mr-2 text-gray-800">Ricarica Conto</i></a>
+		          		<a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-800">Logout</i></a>
+		        	</div>              
+    			</li>
+			</c:if>
           </ul>
 
         </nav>
@@ -178,34 +173,33 @@
                   </thead>
                   <tbody>
                   
-                  <c:if test="${not empty schedinaCorr }">
-                  <tr>
-					<td> </td>
-					<td>${schedinaCorr.data}</td>
-					<td>${schedinaCorr.quota}</td>
-					<td>${schedinaCorr.importo}</td>
-					<td>${schedinaCorr.vincita}</td>
-					<td><a href="/risultati" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Vedi Risultati</a></td>
-					
-					</tr>
+                  <c:if test="${not empty schedineCorr }">
+	                  <c:forEach items="${schedineCorr}" var="schedinaCorr" varStatus="loop">
+	                  	<tr>
+							<td> </td>
+							<td>${schedinaCorr.value.data}</td>
+							<td>${schedinaCorr.value.quota}</td>
+							<td>${schedinaCorr.value.importo}</td>
+							<td>${schedinaCorr.value.vincita}</td>
+							<td><a href="/risultati?codice= ${schedinaCorr.key }" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Vedi Risultati</a></td>
+						
+						</tr>
+					</c:forEach>
 				 </c:if>
                   
-                  <c:forEach items="${schedinaFin}" var="x">
+                   <c:forEach items="${schedinaFin}" var="x">
 					
-				  <form method="get" action="/addSchedina">
-					<tr>
-					<td>${x.codice}</td>
-					<td>${x.data}</td>
-					<td>${x.quota}</td>
-					<td>${x.importo}</td>
-					<td>${x.vincita}</td>
-					<td>${x.esito}</td>
-					
-	
-				
-					</tr>
-					</form>
-				</c:forEach>
+					  <form method="get" action="/addSchedina">
+							<tr>
+								<td>${x.codice}</td>
+								<td>${x.data}</td>
+								<td>${x.quota}</td>
+								<td>${x.importo}</td>
+								<td>${x.vincita}</td>
+								<td>${x.esito}</td>						
+							</tr>
+					  </form>
+				  </c:forEach>
                  
                   </tbody>
                 </table>

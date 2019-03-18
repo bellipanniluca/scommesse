@@ -4,7 +4,7 @@ package com.scommesse.pugbet.controller;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Arrays;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,8 +38,22 @@ public class ControllerSchedina {
 	@Autowired
 	UtenteService us;
 	
+	int i=0;
 	
 	
+	
+	@RequestMapping(value="/ricarica",method=RequestMethod.GET)
+	public String ricarica(@RequestParam("saldo") double importoSaldo,
+						 HttpSession session) {
+		Utente u=(Utente)session.getAttribute("utente");
+		double saldo=u.getSaldo();
+		saldo+=importoSaldo;
+		u.setSaldo(saldo);
+		us.save(u);
+		return "redirect:/";
+	}
+	
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/scommetti", method = RequestMethod.GET)
 	public String scommetti(Model model, HttpSession session) {
 		
@@ -49,8 +63,16 @@ public class ControllerSchedina {
 		SchedinaFinale schedinaCorr = new SchedinaFinale();
 		Schedina copia = (Schedina)session.getAttribute("schedina");
 		Utente u =(Utente)session.getAttribute("utente");
-		
-		double importo = (double)session.getAttribute("importo");
+		i++;
+		double importo=0;
+		try {
+			importo = (double)session.getAttribute("importo");
+			if(importo>u.getSaldo()) {
+				return "redirect:/ricaricasaldo";
+			}
+		}catch(Exception e) {
+			return "redirect:/";
+		}
 		
 		schedinaCorr.setData(LocalDate.now());
 		schedinaCorr.setQuota(copia.getQuotaTotale());
@@ -62,24 +84,55 @@ public class ControllerSchedina {
 		u.setSaldo(u.getSaldo() - importo);
 		us.save(u);
 		
-		session.setAttribute("schedinaCorr", schedinaCorr);
+		HashMap<Integer,SchedinaFinale> schedineCorr;
+		if(session.getAttribute("schedineCorr") == null) {
+			schedineCorr = new HashMap<Integer,SchedinaFinale>();
+		}
+		else {
+			schedineCorr = (HashMap<Integer,SchedinaFinale>)session.getAttribute("schedineCorr");
+		}
+		
+		HashMap<Integer,Schedina> copie;
+		if(session.getAttribute("copie") == null) {
+			copie = new HashMap<Integer,Schedina>();
+		}
+		else {
+			copie = (HashMap<Integer,Schedina>)session.getAttribute("copie");
+		}
+		
+		schedineCorr.put(i,schedinaCorr);
+		copie.put(i, copia);
+		System.out.println("codice" +i);
+		System.out.println("sc" +schedineCorr.get(i)+" copia"+copie.get(i));
+		
+		session.setAttribute("schedineCorr", schedineCorr);
 		session.setAttribute("utente", u);
-		session.setAttribute("copia", copia);
+		session.setAttribute("copie", copie);
 		
 		session.setAttribute("schedina", new Schedina());
 		
-		
 		return "redirect:/riepilogo";
-	}
+}
 	
 	@RequestMapping(value = "/risultati", method = RequestMethod.GET)
-	public String risultati(Model model, HttpSession session) {
+	public String risultati(Model model, HttpSession session,
+							@RequestParam("codice") int codice) {
 		
 		Utente u = (Utente)session.getAttribute("utente");
-		SchedinaFinale sf = (SchedinaFinale)session.getAttribute("schedinaCorr");
 		
-		Schedina schedina = (Schedina)session.getAttribute("copia");
+		@SuppressWarnings("unchecked")
+		HashMap<Integer,SchedinaFinale> sfl=(HashMap<Integer,SchedinaFinale>)session.getAttribute("schedineCorr");
+		SchedinaFinale sf = null;
+		@SuppressWarnings("unchecked")
+		HashMap<Integer,Schedina> copie=(HashMap<Integer,Schedina>)session.getAttribute("copie");
+		//Schedina schedina = (Schedina)session.getAttribute("copia");
+				
 		boolean esitoTot = true;
+		Schedina schedina = null;
+		
+		sf = sfl.get(codice);
+		schedina = copie.get(codice);
+		System.out.println("codice:"+codice);
 		
 		for(Giocata giocata : schedina.getListaGiocate()) {
 			
@@ -110,13 +163,8 @@ public class ControllerSchedina {
 						esitoTot = false;
 					break;
 				}
-				
 			}
-			
 		}
-		
-		
-		
 		
 		if(esitoTot) {
 			
@@ -129,25 +177,22 @@ public class ControllerSchedina {
 			u.setBilancio(b/100);
 			u.setSaldo(c/100);
 			us.save(u);
-			
 		}
 		else {
 			
 			sf.setEsito("Perdente");
 			sfs.save(sf);
-			
 		}
 		
-		sf = null;
-		Schedina s = new Schedina();
-
+		sfl.remove(codice);
+//		Schedina s = new Schedina();
+		copie.remove(codice);
 		
-		session.setAttribute("schedinaCorr", sf);
-		session.setAttribute("copia", s);
-		
+		session.setAttribute("schedineCorr", sfl);
+		session.setAttribute("copie", copie);
 		
 		return "redirect:/riepilogo";
-	}
+}
 	
 	@RequestMapping(value="/delete", method=RequestMethod.GET)
 	public String delete(@RequestParam("btn-match") int idPartita,

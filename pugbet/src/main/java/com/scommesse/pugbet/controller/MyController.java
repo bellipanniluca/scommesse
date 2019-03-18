@@ -177,5 +177,15 @@ public class MyController {
 		
 		return "riepilogo";
 	}
+	@RequestMapping(value="/ricaricasaldo")
+	public String showRicaricaSaldoPage(Model model,HttpSession session) {
+		Utente u=(Utente)session.getAttribute("utente");
+		double saldo=u.getSaldo();
+		
+		model.addAttribute("utente",u);
+		model.addAttribute("saldo",saldo);
+		
+		return "ricaricasaldo";
+	}
 
 }

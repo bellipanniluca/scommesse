@@ -38,7 +38,6 @@
 	}
  </script> 
 
-
 </head>
 
 <body id="page-top">
@@ -52,9 +51,9 @@
       <!-- Sidebar - Brand -->
       <h2 class="sidebar-brand d-flex align-items-center justify-content-center">
         <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
+          <i class="fas fa-paw"></i>
         </div>
-        <div class="sidebar-brand-text mx-3"> PUGBET </div>
+        <div class="sidebar-brand-text mx-3"> <a class="nav-link text-gray-100" href="/">PUGBET </a></div>
         </h2>
 		<c:if test="${empty utente}">
       <!-- Divider -->
@@ -63,7 +62,7 @@
       <!-- Nav Item - Accedi -->
       <li class="nav-item">
         <a class="nav-link" href="/login">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <i class="fas fa-sign-in-alt"></i>
           <span>Accedi</span></a>
       </li>
       
@@ -73,7 +72,7 @@
       <!-- Nav Item - Registrati -->
       <li class="nav-item">
         <a class="nav-link" href="/register">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <i class="fas fa-user-plus"></i>
           <span>Registrati</span></a>
       </li>
       
@@ -95,15 +94,15 @@
 	           		
 	            	<tbody>
 		              	<c:forEach var="giocata" items="${schedina}">
-                       	   <h5>${giocata.tipo}
-                       	   <form method="get" action="/delete"> 
-                       	   		<input type="hidden" name="tipo" value=${giocata.tipo }>
-                       	   		<input type="hidden" name="pagina" value="calcio">
-                   	   			<button type="submit" value=${giocata.id } name="btn-match" class="btn btn-danger btn-circle btn-sm">
-                   	   				<li class="fas fa-trash"></li>
-                   	   			</button>
+                       	   <form method="get" action="/delete">
+	                       	   <h5>${giocata.tipo} 
+	                       	   		<input type="hidden" name="tipo" value=${giocata.tipo }>
+	                       	   		<input type="hidden" name="pagina" value="calcio">
+	                   	   			<button type="submit" value=${giocata.id } name="btn-match" class="btn btn-danger btn-circle btn-sm">
+	                   	   				<li class="fas fa-trash"></li>
+	                   	   			</button>
+	                       	   </h5>
                    	   	  </form>
-                       	   </h5>
                            <p style="font-size:12px">${giocata.casa} vs ${giocata.trasferta}</p>
                            <p style="font-size:12px">Esito ${giocata.quotaSelezionata}  - Quota ${giocata.quotaValore}</p>
 		                </c:forEach>
@@ -113,7 +112,7 @@
 		                Importo:  <input size="3" id="importo" name="importo" onkeyup="myFunction()">
 		                <p id="para"></p>
 		            
-		            	<a href="/scommetti" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Scommetti</a>
+		            	<a href="/scommetti" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"> Scommetti</a>
 		            	</c:if>
 	              	</tbody>
 	             </table>
@@ -133,51 +132,28 @@
         <!-- Topbar -->
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-        
-
-        
-
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
 
             <c:if test="${not empty utente}">
             <!-- Nav Item - User Information -->
-            <li class="nav-item dropdown no-arrow">
-            
-            
-              <a class="nav-link dropdown-toggle" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">${utente.nome } ${utente.cognome }</span>
-                
-              </a>
-              
-              
-              
-              
-            </li>
-            <div class="topbar-divider d-none d-sm-block"></div>
-            <li>
-                
-            <a href="/logout" class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm">Logout</a>
-            </li>
+    	  		<li class="nav-item dropdown ">
+     				<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           				<span class="mr-2 d-none d-lg-inline text-gray-600 small">${utente.nome } ${utente.cognome}</span>    
+           				<img class="rounded-circle" height="32" width="40" src="https://cms-assets.tutsplus.com/uploads/users/127/posts/29412/preview_image/preview.png">    
+        			</a>
+        			<div class="dropdown-menu dropdown-menu-right animated--grow-in" aria-labelledby="userDropdown">
+		            	<a class="dropdown-item" href="/riepilogo"><i class="fas fa-list fa-sm fa-fw mr-2 text-gray-800"></i> Riepilogo</a>
+		            	<a class="dropdown-item" href="/ricaricasaldo"><i class="fas fa-dollar-sign mr-2 text-gray-800"></i>  Ricarica Conto</a>
+		          		<a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-800"></i> Logout</a>
+		        	</div>              
+    			</li>
 			</c:if>
           </ul>
 
         </nav>
         <!-- End of Topbar -->
 
-        <!-- Begin Page Content -->
-        <div class="container-fluid">
-		
-		<c:if test="${not empty utente}">
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            
-            
-            <a href="/riepilogo" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Riepilogo Scommesse</a>
-          	
-          </div>
-		</c:if>
-        
-        <!-- /.container-fluid -->
         
         <!-- Content Row -->
           <div class="  row">
@@ -193,7 +169,7 @@
                       <div class="h5 mb-0 font-weight-bold text-gray-800">Serie A</div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                      <i class="far fa-futbol fa-2x text-gray-300"></i>
                     </div>
                   </div>
                 </div>
@@ -210,7 +186,7 @@
                       <div class="h5 mb-0 font-weight-bold text-gray-800">NBA</div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                      <i class="fas fa-basketball-ball fa-2x text-gray-300"></i>
                     </div>
                   </div>
                 </div>
@@ -228,7 +204,7 @@
                       <div class="h5 mb-0 font-weight-bold text-gray-800">KHL</div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-comments fa-2x text-gray-300"></i>
+                      <i class="fas fa-hockey-puck fa-2x text-gray-300"></i>
                     </div>
                   </div>
                 </div>
