@@ -46,11 +46,15 @@ public class ControllerSchedina {
 	public String ricarica(@RequestParam("saldo") double importoSaldo,
 						 HttpSession session) {
 		Utente u=(Utente)session.getAttribute("utente");
+		if(importoSaldo < 0)
+			return "redirect:/ricaricasaldo";
+		else {
 		double saldo=u.getSaldo();
 		saldo+=importoSaldo;
 		u.setSaldo(saldo);
 		us.save(u);
 		return "redirect:/";
+		}
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -74,10 +78,16 @@ public class ControllerSchedina {
 			return "redirect:/";
 		}
 		
+		if(importo < 0)
+			return "redirect:/";
+		
+		double vincita = copia.getQuotaTotale()*importo;
+		vincita = Math.round(vincita*100);
+		
 		schedinaCorr.setData(LocalDate.now());
 		schedinaCorr.setQuota(copia.getQuotaTotale());
 		schedinaCorr.setImporto(importo);
-		schedinaCorr.setVincita(copia.getQuotaTotale()*importo);
+		schedinaCorr.setVincita(vincita/100);
 		schedinaCorr.setIdUtente(u.getId());
 		
 		u.setBilancio(u.getBilancio() - importo);
@@ -193,7 +203,34 @@ public class ControllerSchedina {
 		session.setAttribute("copie", copie);
 		
 		return "redirect:/riepilogo";
-}
+	}
+	
+	@RequestMapping(value="/rimuoviSchedina", method=RequestMethod.GET)
+	public String rimuovi(Model model, HttpSession session,
+						 @RequestParam("codice") int codice) {
+		
+		Utente u = (Utente)session.getAttribute("utente");
+		
+		@SuppressWarnings("unchecked")
+		HashMap<Integer,SchedinaFinale> sfl=(HashMap<Integer,SchedinaFinale>)session.getAttribute("schedineCorr");
+		SchedinaFinale sf = null;
+		@SuppressWarnings("unchecked")
+		HashMap<Integer,Schedina> copie=(HashMap<Integer,Schedina>)session.getAttribute("copie");
+		
+		sf = sfl.get(codice);
+		
+		u.setSaldo(u.getSaldo() + sf.getImporto());
+		u.setBilancio(u.getBilancio() + sf.getImporto());
+		us.save(u);
+		
+		sfl.remove(codice);
+		copie.remove(codice);
+		session.setAttribute("schedineCorr", sfl);
+		session.setAttribute("copie", copie);
+		
+		return "redirect:/riepilogo";
+		
+	}
 	
 	@RequestMapping(value="/delete", method=RequestMethod.GET)
 	public String delete(@RequestParam("btn-match") int idPartita,
@@ -232,7 +269,10 @@ public class ControllerSchedina {
 		String s=request.getParameter("pa");
 		double cifra=Double.parseDouble(s);
 		Schedina schedina = (Schedina)session.getAttribute("schedina");
-		response.getWriter().print("Totale: "+cifra*schedina.getQuotaTotale());
+		
+		double c = cifra*schedina.getQuotaTotale();
+		c = Math.round(c*100);
+		response.getWriter().print("Totale: "+ c/100);
 		
 		session.setAttribute("importo", cifra);
 	}

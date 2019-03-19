@@ -35,6 +35,9 @@ public class MyController {
 	UtenteService us;
 	
 	@Autowired
+	AdminService as;
+	
+	@Autowired
 	SchedinaFinaleService sfs;
 	
 	@RequestMapping(value="/")
@@ -79,6 +82,11 @@ public class MyController {
 	@RequestMapping(value="/login", method = RequestMethod.GET)
 	public String showLoginPage(ModelMap model){
 		return "login";
+		}
+	
+	@RequestMapping(value="/adminLogin", method = RequestMethod.GET)
+	public String showAdminLoginPage(ModelMap model){
+		return "adminLogin";
 		}
 	
 	@RequestMapping(value="/logout", method = RequestMethod.GET)
@@ -187,5 +195,47 @@ public class MyController {
 		
 		return "ricaricasaldo";
 	}
+	
+	@RequestMapping(value="/utenti", method = RequestMethod.GET)
+	public String showUtenti(ModelMap model, HttpSession session){
+		
+		List<Utente> u = us.findAll();
+		model.addAttribute("att", u);
+		return "utenti";
+
+	}
+	
+	@RequestMapping(value="/adminPage", method = RequestMethod.GET)
+	public String showAdmin(ModelMap model, HttpSession session){
+		
+		List<Admin> a = as.findAll();
+		model.addAttribute("adm", a);
+		return "adminPage";
+	}
+	
+	@RequestMapping(value="/calcioAdmin", method = RequestMethod.GET)
+	public String showCalcioAdmin(ModelMap model, HttpSession session){
+		
+		List<PartitaCalcio> p = pcs.findAll();
+		model.addAttribute("admC", p);
+		return "calcioAdmin";
+	}
+	
+	@RequestMapping(value="/basketAdmin", method = RequestMethod.GET)
+	public String showBasketAdmin(ModelMap model, HttpSession session){
+		
+		List<PartitaBasket> p = pbs.findAll();
+		model.addAttribute("admB", p);
+		return "basketAdmin";
+	}
+	
+	@RequestMapping(value="/hockeyAdmin", method = RequestMethod.GET)
+	public String showHockeyAdmin(ModelMap model, HttpSession session){
+		
+		List<PartitaHockey> p = phs.findAll();
+		model.addAttribute("admH", p);
+		return "hockeyAdmin";
+	}
+
 
 }

@@ -176,13 +176,13 @@
                   <c:if test="${not empty schedineCorr }">
 	                  <c:forEach items="${schedineCorr}" var="schedinaCorr" varStatus="loop">
 	                  	<tr>
-							<td> </td>
+							<td></td>
 							<td>${schedinaCorr.value.data}</td>
 							<td>${schedinaCorr.value.quota}</td>
 							<td>${schedinaCorr.value.importo}</td>
 							<td>${schedinaCorr.value.vincita}</td>
-							<td><a href="/risultati?codice= ${schedinaCorr.key }" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Vedi Risultati</a></td>
-						
+							<td><a href="/risultati?codice= ${schedinaCorr.key }" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Vedi Risultati</a> <a href="/rimuoviSchedina?codice= ${schedinaCorr.key }" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">Annulla</a></td>
+							
 						</tr>
 					</c:forEach>
 				 </c:if>

@@ -11,7 +11,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Pugbet - Login</title>
+  <title>Pugbet - Login Admin </title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -35,33 +35,23 @@
           <div class="card-body p-0">
             <!-- Nested Row within Card Body -->
             <div class="row">
-              <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+              <div class="col-lg-6 d-none d-lg-block">
+              <img src="https://i.imgflip.com/vb1v7.jpg" style="width:105%">
+              </div>
               <div class="col-lg-6">
                 <div class="p-5">
                   <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4"> Accedi </h1>
+                    <h1 class="h4 text-gray-900 mb-4"> Accedi come Amministratore </h1>
                   </div>
-                  <form class="user" method="post" action="/accedi">
+                  <form class="user" method="post" action="/accediAdmin">
                     <div class="form-group">
                       <input type="email" class="form-control form-control-user" name="email" aria-describedby="emailHelp" placeholder="Inserisci il tuo Indirizzo Email...">
                     </div>
                     <div class="form-group">
                       <input type="password" class="form-control form-control-user" name="psswrd" placeholder="Password">
                     </div>
-                    <div class="form-group">
-                      <div class="custom-control custom-checkbox small">
-                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                        <label class="custom-control-label" for="customCheck"> Ricordami </label>
-                      </div>
-                    </div>
                     <input type="submit" value="Login" class="btn btn-primary btn-user btn-block">
-                    
                   </form>
-                  <hr>
-                  <div class="text-center">
-                    <a class="small" href="/register"> Crea un Account! </a>
-                    <br>
-                    <a class="small" href="/adminLogin"> Sei amministratore? Entra qui! </a>
                   </div>
                 </div>
               </div>

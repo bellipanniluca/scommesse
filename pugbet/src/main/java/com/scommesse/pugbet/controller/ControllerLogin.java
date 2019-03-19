@@ -16,6 +16,30 @@ public class ControllerLogin {
 	@Autowired
 	UtenteService us;
 	
+	@Autowired
+	AdminService as;
+	
+	@RequestMapping(value="/accediAdmin", method = RequestMethod.POST)
+	public String accediAdmin(@RequestParam("email") String email,
+						 @RequestParam("psswrd") String pw,
+						 HttpSession session) {
+		
+			Admin admin = new Admin();
+		
+			if((as.findByEmail(email).getPsswrd()).equals(pw)){
+		
+				admin = as.findByEmail(email);
+		
+				System.out.println(admin.getNome() +" loggato");
+				session.setAttribute("admin", admin);
+				return "redirect:/adminPage";
+			}
+	
+			else {
+				System.out.println("login Admin fallito");
+				return "redirect:/login";
+			}
+	}
 	
 	@RequestMapping(value="/accedi", method = RequestMethod.POST)
 	public String accedi(@RequestParam("email") String email,
