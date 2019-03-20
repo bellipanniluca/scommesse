@@ -45,11 +45,11 @@
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
                     <input type="text" class="form-control form-control-user" id="nome" placeholder="Nome" name="nome" 
-                    autocomplete="on" required pattern="[^a-zA-Z]*{1}[a-z_]{2,19}" title="Nome composto da lettere maiuscole, minuscole e '_'; Sono consentiti da 3 a 20 caratteri.">
+                    autocomplete="on" required pattern="[A-Za-z\s]*" title="Nome composto da lettere maiuscole e minuscole.">
                   </div>
                   <div class="col-sm-6">
                     <input type="text"class="form-control form-control-user" id="cognome" placeholder="Cognome" name="cognome" 
-                    autocomplete="on" required pattern="[^a-zA-Z]*{1}[a-z_]{2,19}" title="Cognome composto da lettere maiuscole, minuscole e '_'; Sono consentiti da 3 a 20 caratteri.">
+                    autocomplete="on" required pattern="[A-Za-z\s]*" title="Cognome composto da lettere maiuscole e minuscole.">
                   </div>
                 </div>
                 <div class="form-group">
@@ -69,8 +69,7 @@
                       </div>
                     </div>
                   </div>
-                 <input type="submit" value="Registra Account" class="btn btn-primary btn-user btn-block">
-               
+                 <input type="submit" value="Registra Account" class="btn btn-primary btn-user btn-block">	
               </form>
               <hr>
               <div class="text-center">
@@ -81,8 +80,7 @@
         </div>
       </div>
     </div>
-
-  </div>
+	</div>
 
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>

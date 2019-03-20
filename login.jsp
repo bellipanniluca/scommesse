@@ -20,7 +20,9 @@
 
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-2.css" rel="stylesheet">
-    	
+  
+  <link href="_alert.css" media="screen" rel="stylesheet" type="text/css" />
+
 </head>
 
 <body class="bg-gradient-primary">
