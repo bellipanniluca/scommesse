@@ -150,8 +150,9 @@
 					  <th></th>
                     </tr>
                   </thead>
-                  <c:forEach items="${admH}" var="z"> 
+                   
                   <tbody>
+					<c:forEach items="${admH}" var="z">
 					<tr>
 					<td>${z.id}</td>
 					<td>${z.anno}</td>

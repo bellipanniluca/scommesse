@@ -143,9 +143,9 @@
            				<img class="rounded-circle" height="32" width="40" src="https://cms-assets.tutsplus.com/uploads/users/127/posts/29412/preview_image/preview.png">    
         			</a>
         			<div class="dropdown-menu dropdown-menu-right animated--grow-in" aria-labelledby="userDropdown">
-		            	<a class="dropdown-item" href="/riepilogo"><i class="fas fa-list fa-sm fa-fw mr-2 text-gray-800"></i> Riepilogo</a>
-		            	<a class="dropdown-item" href="/ricaricasaldo"><i class="fas fa-dollar-sign mr-2 text-gray-800"></i>  Ricarica Conto</a>
-		          		<a class="dropdown-item" data-toggle="modal" data-target="#logoutModal" href="/logout"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-800"></i> Logout</a>
+		            	<a class="dropdown-item" href="/riepilogo"><i class="fas fa-list fa-sm fa-fw mr-2 text-gray-800"></i>Riepilogo</a>
+		            	<a class="dropdown-item" href="/ricaricasaldo"><i class="fas fa-dollar-sign mr-2 text-gray-800"></i>Ricarica Conto</a>
+		          		<a class="dropdown-item" data-toggle="modal" data-target="#logoutModal" href="/logout"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-800"></i>Esci</a>
 		        	</div>              
     			</li>
 			</c:if>
@@ -293,15 +293,15 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Logout</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-body">Sei sicuro di uscire?</div>
         <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login">Logout</a>
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">No</button>
+          <a class="btn btn-primary" href="login">Si</a>
         </div>
       </div>
     </div>

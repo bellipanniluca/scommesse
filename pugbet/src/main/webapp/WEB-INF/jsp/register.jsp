@@ -35,6 +35,8 @@
           <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
           <div class="col-lg-7">
             <div class="p-5">
+            <a href="/">
+			<img src="https://www.sunny.pet/wp-content/uploads/2017/03/casa-azul.png" style="width:3rem"></a>
               <div class="text-center">
                 <h1 class="h4 text-gray-900 mb-4">Crea un Account!</h1>
               </div>
@@ -42,31 +44,32 @@
 				<form class="user" method="post" action="/reg">
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="text" class="form-control form-control-user" id="nome" placeholder="Nome" name="nome">
+                    <input type="text" class="form-control form-control-user" id="nome" placeholder="Nome" name="nome" 
+                    autocomplete="on" required pattern="[A-Za-z\s]*" title="Nome composto da lettere maiuscole e minuscole.">
                   </div>
                   <div class="col-sm-6">
-                    <input type="text"class="form-control form-control-user" id="cognome" placeholder="Cognome" name="cognome">
+                    <input type="text"class="form-control form-control-user" id="cognome" placeholder="Cognome" name="cognome" 
+                    autocomplete="on" required pattern="[A-Za-z\s]*" title="Cognome composto da lettere maiuscole e minuscole.">
                   </div>
                 </div>
                 <div class="form-group">
-                  <input type="email" class="form-control form-control-user" id="email" placeholder="Email" name="email">
+                  <input type="email" class="form-control form-control-user" id="email" placeholder="Email" name="email" required>
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="password" class="form-control form-control-user" id="password" placeholder="Password" name="psswrd">
+                    <input type="password" class="form-control form-control-user" id="password" placeholder="Password" name="psswrd" required>
                   </div>
                   <div class="col-sm-6">
-                    <input type="password" class="form-control form-control-user" id="password2" placeholder="Ripeti Password" name="psswrd2">
+                    <input type="password" class="form-control form-control-user" id="password2" placeholder="Ripeti Password" name="psswrd2" required>
                   </div>
                   <div class="form-group">
                       <div class="custom-control custom-checkbox small">
-                        <input type="checkbox" class="custom-control-input" id="customCheck">
+                        <input type="checkbox" class="custom-control-input" id="customCheck" required>
                         <label class="custom-control-label" for="customCheck"> Attesto di essere maggiorenne. </label>
                       </div>
                     </div>
                   </div>
-                 <input type="submit" value="Registra Account" class="btn btn-primary btn-user btn-block">
-               
+                 <input type="submit" value="Registra Account" class="btn btn-primary btn-user btn-block">	
               </form>
               <hr>
               <div class="text-center">
@@ -77,8 +80,7 @@
         </div>
       </div>
     </div>
-
-  </div>
+	</div>
 
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>

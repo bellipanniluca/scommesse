@@ -40,6 +40,8 @@
               </div>
               <div class="col-lg-6">
                 <div class="p-5">
+                  <a href="/">
+				<img src="https://www.sunny.pet/wp-content/uploads/2017/03/casa-azul.png" style="width:3rem"></a>
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4"> Accedi come Amministratore </h1>
                   </div>
