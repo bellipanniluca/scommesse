@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
+/** Questa classe rappresenta l'amministratore del sito che ha funzioni diverse dall'utente. **/
 @Entity
 @Table(name="admin")
 public class Admin {
