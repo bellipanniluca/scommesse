@@ -34,6 +34,7 @@ public class ControllerAdmin {
 
 		us.deleteById(id);
 		System.out.println("Utente cancellato");
+		sfs.deleteByIdUtente(id);
 		return "redirect:/utenti";
 	}
 	
