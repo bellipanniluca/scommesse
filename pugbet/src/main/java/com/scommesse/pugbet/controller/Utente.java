@@ -1,6 +1,5 @@
 package com.scommesse.pugbet.controller;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
