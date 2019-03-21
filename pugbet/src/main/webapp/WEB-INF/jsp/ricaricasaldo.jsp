@@ -41,10 +41,10 @@
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4"> Ricarica Saldo </h1>
                   </div>
-                  <p>Il tuo saldo al momento è di: ${utente.saldo } euro</p>
+                  <p>Il tuo saldo al momento Ã¨ di: ${utente.saldo } euro</p>
                   <form method="get" action="/ricarica">
                     <div class="form-group">
-                      <input class="form-control form-control-user" name="saldo" placeholder="Inserisci l' importo...">
+                      <input type="number" class="form-control form-control-user" name="saldo" placeholder="Inserisci l' importo...">
                     </div>
                     <input type="submit" value="Ricarica" class="btn btn-primary btn-user btn-block">
                     
