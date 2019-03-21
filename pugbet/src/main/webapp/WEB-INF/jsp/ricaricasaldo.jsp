@@ -38,6 +38,8 @@
               <div class="col-lg-6 d-none d-lg-block "><img src="https://media.giphy.com/media/12pJ8OxSWwO86Y/giphy.gif"></div>
               <div class="col-lg-6">
                 <div class="p-5">
+                   <a href="/">
+				<img src="https://www.sunny.pet/wp-content/uploads/2017/03/casa-azul.png" style="width:3rem"></a>
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4"> Ricarica Saldo </h1>
                   </div>
